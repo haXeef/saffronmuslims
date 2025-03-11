@@ -60,3 +60,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Donation button alerts
+document.querySelectorAll('.donate-alert').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Donation functionality coming soon. Thank you for your interest in supporting our community!');
+    });
+});
+
+// External button alerts
+document.querySelectorAll('.external-alert').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Coming soon!');
+    });
+});

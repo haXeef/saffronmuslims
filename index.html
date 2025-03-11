@@ -5,48 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saffron Walden Muslim Community</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/fallback/small/workinglogo.png" type="image/png">
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://api.qrserver.com">
     <!-- You can add Google Fonts here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#D57330">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="The Saffron Walden Muslim Community provides prayer facilities, and community support for Muslims in Saffron Walden, Essex and surrounding areas.">
+    <meta name="keywords" content="Muslim, Islam, Saffron Walden, Essex, prayer times, mosque, Jummah, Islamic community, Salah">
+    <link rel="canonical" href="https://saffronmuslims.com/">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ReligiousOrganization",
+        "name": "Saffron Walden Muslim Community",
+        "url": "https://saffronmuslims.com",
+        "logo": "https://saffronmuslims.com/images/workinglogo.png",
+        "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Saffron Walden",
+        "addressRegion": "Essex",
+        "postalCode": "CB10 1AA",
+        "streetAddress": "Friends Meeting House, High Street"
+        },
+        "description": "A growing Muslim community in the historic market town of Saffron Walden, Essex.",
+        "telephone": "",
+        "sameAs": ["https://t.me/+_CJlHCCCnI1jMjA8"]
+    }
+    </script>
 </head>
 <body>
+
     <!-- Prayer Times Banner -->
     <div class="prayer-times-banner">
         <div class="prayer-times-container">
-            <!-- Left Column -->
+            <!-- Date Information -->
             <div class="date-column">
                 <div class="date-text">
-                    <span class="dayNumber">22 February 2025 · 23 Sha'ban 1446</span>
+                    <span class="dayNumber">02 March 2025 · 1 Ramadan 1446</span>
                 </div>
                 <div class="juma-details">
-                    JUM'A 13:00 · PRAYER TIMES
+                    <a href="#prayers">PRAYER TIMES</a> · JUM'A 13:30
                 </div>
             </div>
             
-            <!-- Right Column -->
-            <div class="prayer-grid">
-                <div class="prayer-cell"></div>
-                <div class="prayer-header">FAJR</div>
-                <div class="prayer-header">ZUHR</div>
-                <div class="prayer-header">ASR</div>
-                <div class="prayer-header">MAGHRIB</div>
-                <div class="prayer-header">ISHA</div>
-                     
-                <div class="prayer-label">BEGINS</div>
-                <div class="prayer-time" id="fajr-begins">05:24</div>
-                <div class="prayer-time" id="zuhr-begins">12:18</div>
-                <div class="prayer-time" id="asr-begins">15:34</div>
-                <div class="prayer-time" id="maghrib-begins">17:29</div>
-                <div class="prayer-time" id="isha-begins">18:50</div>
+            <!-- Prayer Times -->
+            <div class="prayer-times-flex">
+                <div class="prayer-item">
+                    <div class="prayer-name">FAJR</div>
+                    <div class="prayer-value" id="fajr-begins">05:00</div>
+                </div>
+                <div class="prayer-item">
+                    <div class="prayer-name">ZUHR</div>
+                    <div class="prayer-value" id="zuhr-begins">13:00</div>
+                </div>
+                <div class="prayer-item">
+                    <div class="prayer-name">ASR</div>
+                    <div class="prayer-value" id="asr-begins">16:00</div>
+                </div>
+                <div class="prayer-item">
+                    <div class="prayer-name">MAGHRIB</div>
+                    <div class="prayer-value" id="maghrib-begins">17:00</div>
+                </div>
+                <div class="prayer-item">
+                    <div class="prayer-name">ISHA</div>
+                    <div class="prayer-value" id="isha-begins">19:00</div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Header Navigation -->
-    <header>
+    <header class="header">
         <div class="header-container">
             <a href="#" class="logo">
                 <div class="logo-icon">
-                    <img src="images/workinglogo.png" alt="Saffron Walden Muslim Community [Working]Logo" class="logo-image">
+                    <img src="images/fallback/large/workinglogo.png" alt="Saffron Walden Muslim Community logo featuring traditional Islamic geometric patterns" class="logo-image">
                 </div>
                 <div class="logo-text">
                     <div class="logo-line">
@@ -54,7 +95,7 @@
                         <span class="logo-secondary">Muslim</span>
                     </div>
                     <div class="logo-line">
-                        <span class="logo-primary">  WALDEN</span>
+                        <span class="logo-primary">WALDEN</span>
                         <span class="logo-secondary">Community</span>
                     </div>
                 </div>
@@ -63,11 +104,11 @@
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="#prayers" class="nav-link">Prayer Times</a></li>
                     <li class="nav-item"><a href="#location" class="nav-link">Location</a></li>
-                    <li class="nav-item"><a href="#donate" class="donate-btn">Donate</a></li>
+                    <li class="nav-item"><a href="#donate" class="nav-link">Donate</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
                     <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
                 </ul>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
@@ -75,10 +116,10 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="main-content">
         <div class="hero-content">
             <h1 class="hero-title">Saffron Walden Muslim Community</h1>
-            <p class="hero-subtitle">Welcome to our growing community in the historic town of Saffron Walden. Join us for prayer, education, and fellowship.</p>
+            <p class="hero-subtitle">Welcome to our growing community in the historic market town of Saffron Walden. Join us for prayer, education, and fellowship.</p>
             <div class="hero-buttons">
                 <a href="#prayers" class="hero-btn">Prayer Times</a>
                 <a href="#donate" class="hero-btn hero-btn-outline">Support Us</a>
@@ -103,30 +144,30 @@
                         </div -->
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Fajr:</span>
-                            <span>05:24</span>
+                            <span>05:00</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-labels">Sunrise:</span>
-                            <span>06:42</span>
+                            <span>07:00</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Dhuhr:</span>
-                            <span>12:18</span>
+                            <span>13:00</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Asr:</span>
-                            <span>15:34</span>
+                            <span>16:00</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Maghrib:</span>
-                            <span>17:29</span>
+                            <span>17:00</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Isha:</span>
-                            <span>18:50</span>
+                            <span>19:00</span>
                         </div>
                     </div>
-                    <p class="prayer-card-note">Prayer times updated daily. Asr time shown is according to Hanafi school.</p>
+                    <p class="prayer-card-note">Prayer times updated daily. Asr time shown follows the Hanafi school. Shaf'i school Asr time is <strong>--:--</strong> today.</p>
                 </div>
                 
                 <div class="prayer-card">
@@ -134,18 +175,18 @@
                     <div class="prayer-info">
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Khutbah begins:</span>
-                            <span>13:00</span>
+                            <span>13:30</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Prayer begins:</span>
-                            <span>13:10</span>
+                            <span>13:40</span>
                         </div>
                         <div class="prayer-info-item">
                             <span class="prayer-info-label">Location:</span>
                             <span>Friends Meeting House</span>
                         </div>
                     </div>
-                    <p class="prayer-card-note">Please arrive 10-15 minutes early to prepare for prayer.</p>
+                    <p class="prayer-card-note">Please arrive 10–15 minutes early to prepare for prayer.</p>
                 </div>
                 
                 <div class="prayer-card">
@@ -173,19 +214,18 @@
     <section id="location" class="section location-section">
         <div class="section-container">
             <div class="section-title">
-                <h2 class="section-heading">Our Location</h2>
+                <h2 class="section-heading">Congregational Prayer</h2>
                 <p class="section-subheading">Find us at the Friends Meeting House</p>
             </div>
             
             <div class="location-container">
-                <div class="map-container">
-                    <!-- Replace with actual map embed code -->
+                <div class="map-container">                    
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2455.2069792862626!2d0.2366851486572266!3d52.02132694355538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d862800113bc7f%3A0x1b3dbd580bf25256!2sFriends%20Meeting%20House!5e0!3m2!1sen!2suk!4v1740710939743!5m2!1sen!2suk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 
                 <div class="location-info">
                     <h3>Visiting the Meeting House</h3>
-                    <p>We hold our Friday prayers and community events at the historic Friends Meeting House in Saffron Walden. The building is located in the heart of the town and is easily accessible on foot from the town center.</p>
+                    <p>We hold our Friday prayers at the historic Friends Meeting House in Saffron Walden. The building is situated in the heart of the town and is easily accessible on foot from the town centre.</p>
                     
                     <div class="location-details">
                         <div class="location-detail">
@@ -206,8 +246,7 @@
                             </div>
                             <div class="location-text">
                                 <h4>Opening Hours</h4>
-                                <p>Friday: 12:30 - 15:00 (for Jum'a)</p>
-                                <p>Community events: As announced</p>
+                                <p>Friday: 13:00 - 14:00 (for Jum'a)</p>
                             </div>
                         </div>
                         
@@ -217,9 +256,9 @@
                             </div>
                             <div class="location-text">
                                 <h4>Getting Here</h4>
-                                <p>Bus: The nearest bus stop is on High Street (2 minutes walk)</p>
+                                <p>Bus: The nearest bus stop is on High Street (1 minute walk)</p>
                                 <p>Train: Audley End station is 3 miles away with taxi services available</p>
-                                <p>Parking: Public parking available at Swan Meadow Car Park (5 minutes walk)</p>
+                                <p>Parking: Public parking available at Saffron Walden Common Car Park (7 minutes walk)</p>
                             </div>
                         </div>
                     </div>
@@ -238,15 +277,33 @@
             
             <div class="directions-container">
                 <div class="directions-intro">
-                    <p>The Saffron Walden Muslim Community holds Friday prayers at the Quaker Meeting House. 
-                    The prayer room is located on the first floor in the Small Meeting Room.</p>
-                    <p><strong>Follow these simple directions to find your way.</strong></p>
+                    <p>The Saffron Walden Muslim Community holds Friday prayers at the Quaker Meeting House.
+                        The prayer room is situated on the first floor in the Small Meeting Room.</p>
+                    <p><strong>Please follow these directions to find your way.</strong></p>
                 </div>
                 
                 <div class="directions-steps">
                     <div class="direction-step">
                         <div class="direction-image">
-                            <img src="images/20250221_142612.jpg" alt="Quaker Meeting House Entrance">
+                            <picture>
+                                <source 
+                                    srcset="images/webp/small/20250228_133315.webp 480w,
+                                            images/webp/medium/20250228_133315.webp 768w,
+                                            images/webp/large/20250228_133315.webp 1200w"
+                                    sizes="(max-width: 480px) 480px,
+                                           (max-width: 768px) 768px,
+                                           1200px"
+                                    type="image/webp">
+                                <img src="images/fallback/large/20250228_133315.jpg" 
+                                     srcset="images/fallback/small/20250228_133315.jpg 480w,
+                                             images/fallback/medium/20250228_133315.jpg 768w,
+                                             images/fallback/large/20250228_133315.jpg 1200w"
+                                     sizes="(max-width: 480px) 480px,
+                                            (max-width: 768px) 768px,
+                                            1200px"
+                                     alt="Quaker Meeting House Entrance" 
+                                     loading="lazy">
+                            </picture>
                         </div>
                         <div class="direction-text">
                             <h3><span class="step-number">1</span> Locate the Meeting House</h3>
@@ -260,7 +317,25 @@
                     
                     <div class="direction-step">
                         <div class="direction-image">
-                            <img src="images/20250221_133021.jpg" alt="Welcome Sign Inside Entrance">
+                            <picture>
+                                <source 
+                                    srcset="images/webp/small/20250221_133021.webp 480w,
+                                            images/webp/medium/20250221_133021.webp 768w,
+                                            images/webp/large/20250221_133021.webp 1200w"
+                                    sizes="(max-width: 480px) 480px,
+                                           (max-width: 768px) 768px,
+                                           1200px"
+                                    type="image/webp">
+                                <img src="images/fallback/large/20250221_133021.jpg" 
+                                     srcset="images/fallback/small/20250221_133021.jpg 480w,
+                                             images/fallback/medium/20250221_133021.jpg 768w,
+                                             images/fallback/large/20250221_133021.jpg 1200w"
+                                     sizes="(max-width: 480px) 480px,
+                                            (max-width: 768px) 768px,
+                                            1200px"
+                                     alt="Welcome Sign Inside Entrance" 
+                                     loading="lazy">
+                            </picture>
                         </div>
                         <div class="direction-text">
                             <h3><span class="step-number">2</span> Enter the Building</h3>
@@ -274,7 +349,25 @@
                     
                     <div class="direction-step">
                         <div class="direction-image">
-                            <img src="images/20250221_133015.jpg" alt="Staircase to Upper Floor">
+                            <picture>
+                                <source 
+                                    srcset="images/webp/small/20250221_133015.webp 480w,
+                                            images/webp/medium/20250221_133015.webp 768w,
+                                            images/webp/large/20250221_133015.webp 1200w"
+                                    sizes="(max-width: 480px) 480px,
+                                           (max-width: 768px) 768px,
+                                           1200px"
+                                    type="image/webp">
+                                <img src="images/fallback/large/20250221_133015.jpg" 
+                                     srcset="images/fallback/small/20250221_133015.jpg 480w,
+                                             images/fallback/medium/20250221_133015.jpg 768w,
+                                             images/fallback/large/20250221_133015.jpg 1200w"
+                                     sizes="(max-width: 480px) 480px,
+                                            (max-width: 768px) 768px,
+                                            1200px"
+                                     alt="Staircase to Upper Floor" 
+                                     loading="lazy">
+                            </picture>
                         </div>
                         <div class="direction-text">
                             <h3><span class="step-number">3</span> Go Up the Stairs</h3>
@@ -288,7 +381,25 @@
                     
                     <div class="direction-step">
                         <div class="direction-image">
-                            <img src="images/20250221_132936.jpg" alt="Small Meeting Room Door">
+                            <picture>
+                                <source 
+                                    srcset="images/webp/small/20250221_132936.webp 480w,
+                                            images/webp/medium/20250221_132936.webp 768w,
+                                            images/webp/large/20250221_132936.webp 1200w"
+                                    sizes="(max-width: 480px) 480px,
+                                           (max-width: 768px) 768px,
+                                           1200px"
+                                    type="image/webp">
+                                <img src="images/fallback/large/20250221_132936.jpg" 
+                                     srcset="images/fallback/small/20250221_132936.jpg 480w,
+                                             images/fallback/medium/20250221_132936.jpg 768w,
+                                             images/fallback/large/20250221_132936.jpg 1200w"
+                                     sizes="(max-width: 480px) 480px,
+                                            (max-width: 768px) 768px,
+                                            1200px"
+                                     alt="Small Meeting Room Door" 
+                                     loading="lazy">
+                            </picture>
                         </div>
                         <div class="direction-text">
                             <h3><span class="step-number">4</span> Enter the Small Meeting Room</h3>
@@ -308,10 +419,10 @@
                     <div class="directions-note-text">
                         <h4>Important Notes</h4>
                         <ul class="directions-list">
-                            <li><i class="fas fa-clock note-icon"></i> Please arrive 10-15 minutes before prayer time to settle in quietly</li>
+                            <li><i class="fas fa-clock note-icon"></i> Please arrive 10–15 minutes before prayer time to settle in quietly</li>
                             <li><i class="fas fa-volume-down note-icon"></i> The building is shared with others, so please be respectful of noise levels</li>
-                            <li><i class="fas fa-pray note-icon"></i> Prayer mats are provided, but you're welcome to bring your own</li>
-                            <li><i class="fas fa-hand-holding-water note-icon"></i> Wudu (ablution) facilities are available in the ground floor restrooms</li>
+                            <li><i class="fas fa-pray note-icon"></i> Prayer mats are provided, but you are welcome to bring your own</li>
+                            <li><i class="fas fa-hand-holding-water note-icon"></i> Please arrive with Wudu. Facilities are available in the ground floor restrooms</li>
                             <li><i class="fas fa-hands-helping note-icon"></i> If you need assistance, friendly community members will be happy to help</li>
                         </ul>
                     </div>
@@ -325,36 +436,36 @@
         <div class="section-container">
             <div class="section-title">
                 <h2 class="section-heading donation-title">Support Our Community</h2>
-                <p class="donation-description">We are fundraising to establish a permanent mosque in Saffron Walden. Your generous donations will help us create a dedicated space for prayer, education, and community activities.</p>
+                <p class="donation-description">We are raising funds to establish a dedicated community facility in Saffron Walden. Your generous donations will help us create a dedicated space for prayer, education, and community activities.</p>
             </div>
             
             <div class="donation-cards">
                 <div class="donation-card">
                     <h3 class="donation-card-title">One-Time Donation</h3>
-                    <p class="donation-card-description">Support our mosque fund with a one-time contribution of any amount. Every donation brings us closer to our goal.</p>
+                    <p class="donation-card-description">Support us with a one-off contribution of any amount. Every donation brings us closer to our goal.</p>
                     <div class="donation-amount">£20</div>
-                    <a href="#" class="donation-btn">Donate Now</a>
+                    <a href="#" class="donation-btn donate-alert">Donate Now</a>
                 </div>
                 
                 <div class="donation-card">
                     <h3 class="donation-card-title">Monthly Support</h3>
                     <p class="donation-card-description">Become a regular supporter with a monthly donation. Help us plan for the future with sustained funding.</p>
                     <div class="donation-amount">£10/month</div>
-                    <a href="#" class="donation-btn">Subscribe</a>
+                    <a href="#" class="donation-btn donate-alert">Subscribe</a>
                 </div>
                 
                 <div class="donation-card">
                     <h3 class="donation-card-title">Business Sponsor</h3>
-                    <p class="donation-card-description">Patronise your community by sponsoring events, and support building fund contributions. Complimentary advert included.</p>
+                    <p class="donation-card-description">Support your community by sponsoring events and building fund. Complimentary advertisement included.</p>
                     <div class="donation-amount">£100+</div>
-                    <a href="#" class="donation-btn">Become a Sponsor</a>
+                    <a href="#" class="donation-btn donate-alert">Become a Sponsor</a>
                 </div>
             </div>
             
-            <div class="donation-progress">
+            <!-- div class="donation-progress">
                 <div class="progress-stats">
                     <div class="progress-stat">
-                        <div class="progress-number">£10,000</div>
+                        <div class="progress-number">£1,000</div>
                         <div class="progress-label">Raised so far</div>
                     </div>
                     <div class="progress-stat">
@@ -370,7 +481,7 @@
                     <div class="progress-bar" style="width: 10.5%;"></div>
                 </div>
                 <div class="progress-text">5% of our goal reached</div>
-            </div>
+            </div -->
         </div>
     </section>
 
@@ -385,7 +496,7 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>How to Reach Us</h3>
-                    <p>We'd love to hear from you, whether you're interested in joining our community, have questions about Islam, or want to learn more about our fundraising.</p>
+                    <p>We would be delighted to hear from you, whether you're interested in joining our community, have questions about Islam, or wish to learn more about our fundraising efforts.</p>
                     
                     <div class="contact-details">
                         <div class="contact-item">
@@ -394,7 +505,7 @@
                             </div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p><a href="mailto:info@swmuslimcommunity.org">To be confirmed</a></p>
+                                <p><a href="#" class="donation-btn external-alert">To be confirmed</a></p>
                             </div>
                         </div>
                         
@@ -414,7 +525,7 @@
                             </div>
                             <div class="contact-text">
                                 <h4>Telegram Group</h4>
-                                <p><a href="https://t.me/+_CJlHCCCnI1jMjA8" target="_blank">Join our community Telegram group</a></p>
+                                <p><a href="https://t.me/+_CJlHCCCnI1jMjA8" target="_blank" rel="noopener noreferrer">Join our community Telegram group</a></p>
                             </div>
                         </div>
         
@@ -471,11 +582,29 @@
             
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/20250221_133037.jpg" alt="Friends Meeting House, Saffron Walden">
+                    <picture>
+                        <source 
+                            srcset="images/webp/small/20250221_133037.webp 480w,
+                                    images/webp/medium/20250221_133037.webp 768w,
+                                    images/webp/large/20250221_133037.webp 1200w"
+                            sizes="(max-width: 480px) 480px,
+                                   (max-width: 768px) 768px,
+                                   1200px"
+                            type="image/webp">
+                        <img src="images/fallback/large/20250221_133037.jpg" 
+                             srcset="images/fallback/small/20250221_133037.jpg 480w,
+                                     images/fallback/medium/20250221_133037.jpg 768w,
+                                     images/fallback/large/20250221_133037.jpg 1200w"
+                             sizes="(max-width: 480px) 480px,
+                                    (max-width: 768px) 768px,
+                                    1200px"
+                             alt="Friends Meeting House, Saffron Walden" 
+                             loading="lazy">
+                    </picture>
                 </div>
                 <div class="about-text">
                     <h3>Our Growing Community</h3>
-                    <p>The Saffron Walden Muslim Community is a diverse group of Muslims living in and around the beautiful historic market town of Saffron Walden, Essex. Although we currently do not have our own mosque building, we are blessed to use the facilities at the Friends Meeting House for our Friday prayers.</p>
+                    <p>The Saffron Walden Muslim Community comprises a diverse group of Muslims residing in and around the beautiful historic market town of Saffron Walden, Essex. Whilst we do not currently have our own premises, we are fortunate to utilise the facilities at the Friends Meeting House for our Friday prayers.</p>
                     <p>Our community is made up of families, students, and professionals from various backgrounds and walks of life, all united by our faith and love for this charming town.</p>
                     
                     <div class="feature-list">
@@ -538,7 +667,7 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#prayers">Prayer Times</a></li>
                     <li><a href="#location">Location</a></li>
-                    <li><a href="#events">Events</a></li>
+                    <!-- li><a href="#events">Events</a></li -->
                     <li><a href="#donate">Donate</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -547,11 +676,11 @@
             <div class="footer-links-col">
                 <h4 class="footer-heading">Resources</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Islamic Calendar</a></li>
-                    <li><a href="#">Prayer Times Calculator</a></li>
-                    <li><a href="#">Learn Quran Online</a></li>
-                    <li><a href="#">Islamic Articles</a></li>
-                    <li><a href="#">Nearby Halal Restaurants</a></li>
+                    <li><a href="#" class="donation-btn external-alert">Islamic Calendar</a></li>
+                    <li><a href="#" class="donation-btn external-alert">Prayer Times Calculator</a></li>
+                    <li><a href="#" class="donation-btn external-alert">Learn Quran Online</a></li>
+                    <li><a href="#" class="donation-btn external-alert">Islamic Articles</a></li>
+                    <li><a href="#" class="donation-btn external-alert">Nearby Halal Restaurants</a></li>
                 </ul>
             </div>
             
