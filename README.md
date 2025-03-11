@@ -10,6 +10,7 @@ This project provides a website for the Saffron Walden Muslim Community. The sit
 
 - **Responsive Design**: Works on devices of all sizes
 - **Auto-updating Prayer Times**: Uses the Aladhan API to display accurate daily prayer times
+- **Offline Support**: Caches prayer times for offline functionality
 - **Interactive Map**: Shows the location of the Quaker Meeting House where prayers are held
 - **Mobile-Friendly Navigation**: Collapsible menu on smaller screens
 - **Clean, Locally-Inspired Design**: Color scheme inspired by Saffron Walden architecture
@@ -30,9 +31,16 @@ saffronmuslims/
 ├── css/
 │   └── styles.css
 ├── images/
-│   └── bridge-street.png
-│   └── Castle-Street-SW-Gordon-Ridgewell.jpg
-│   └── 20250221_*.jpg (direction images)
+│   ├── fallback/
+│   │   ├── large/ (desktop optimized JPG/PNG images)
+│   │   ├── medium/ (tablet optimized JPG/PNG images)
+│   │   └── small/ (mobile optimized JPG/PNG images)
+│   ├── webp/
+│   │   ├── large/ (desktop optimized WebP images)
+│   │   ├── medium/ (tablet optimized WebP images)
+│   │   └── small/ (mobile optimized WebP images)
+│   ├── bridge-street.jpg
+│   ├── Castle-Street-SW-Gordon-Ridgewell.jpg
 │   └── workinglogo.png
 ├── js/
 │   ├── main.js
@@ -47,7 +55,7 @@ saffronmuslims/
 
 1. Clone this repository:
    ```
-   git clone https://github.com/your-username/saffronmuslims.git
+   git clone https://github.com/haXeef/saffronmuslims.git
    ```
 2. Open `index.html` in your browser
 
@@ -56,7 +64,11 @@ saffronmuslims/
 1. Push to the `main` branch of your GitHub repository
 2. Go to repository settings → Pages
 3. Select the `main` branch as the source
-4. Your site will be available at `https://your-username.github.io/saffronmuslims/`
+4. Your site will be available at `https://haxeef.github.io/saffronmuslims/`
+
+## Live Website
+
+Visit the live website at: [https://saffronmuslims.com/](https://saffronmuslims.com/)
 
 ## Future Plans
 
@@ -69,6 +81,12 @@ saffronmuslims/
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
 ## License
 

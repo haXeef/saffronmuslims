@@ -1,26 +1,76 @@
-/* Main CSS File for Saffron Walden Muslim Community Website */
+/* 
+ * Saffron Walden Muslim Community Website
+ * Main Stylesheet
+ * 
+ * Table of Contents:
+ * 1. CSS Variables & Base Styles
+ * 2. Typography
+ * 3. Layout & Grid Utilities
+ * 4. Header & Navigation
+ * 5. Prayer Times Banner
+ * 6. Hero Section
+ * 7. Section Components
+ * 8. Prayer Times Section
+ * 9. Location & Directions
+ * 10. Donation Components
+ * 11. Contact Section
+ * 12. About Section
+ * 13. Footer
+ * 14. Animations & Effects
+ * 15. Utility Classes
+ * 16. Media Queries
+ */
 
-:root {
+/* ===================================
+   1. CSS Variables & Base Styles
+   =================================== */
+   :root {
+    /* Primary Color Palette - Inspired by local Saffron Walden architecture */
     --primary-color: #D57330; /* Terracotta/orange from local buildings */
     --secondary-color: #8B4513; /* Saddle brown from timber frames */
     --accent-color: #283e4a; /* Tudor timber dark */
     --light-color: #f2ede4; /* Off-white/cream */
     --dark-color: #292218; /* Deep brown */
     --text-color: #333333;
+    
+    /* Supportive Pastel Palette */
     --pastel-pink: #e6c6c9;
     --pastel-blue: #b8d1e0;
     --pastel-yellow: #f0e6a6;
     --pastel-lavender: #d9c7e5;
-    --transition: all 0.3s ease;
-}
-
-/* Font family utilities */
-.font-title {
-    font-family: 'Cinzel', Georgia, serif;
-}
-
-.font-body {
-    font-family: 'EB Garamond', Georgia, serif;
+    
+    /* Functional Colors */
+    --success-color: #4CAF50;
+    --warning-color: #FFC107;
+    --error-color: #d25757;
+    --info-color: #2196F3;
+    
+    /* Spacing Variables */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+    
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-medium: all 0.3s ease;
+    --transition-slow: all 0.5s ease;
+    
+    /* Container Widths */
+    --container-max-width: 1200px;
+    --container-padding: 2rem;
 }
 
 /* Reset and Base Styles */
@@ -30,79 +80,215 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--light-color);
     color: var(--text-color);
     line-height: 1.4;
     font-family: 'EB Garamond', 'Georgia', serif;
+    overflow-x: hidden;
 }
 
-/* Header & Navigation */
-.prayer-times-banner {
-    background-color: rgba(40, 62, 74, 0.9);
-    color: var(--light-color);
-    padding: 0.5rem 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-.prayer-times-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 2rem;
-    padding: 0 1rem;
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition-medium);
 }
 
-.prayer-grid {
-    display: grid;
-    grid-template-columns: auto repeat(5, 1fr);
-    gap: 1rem;
-    align-items: center;
+a:hover {
+    color: var(--secondary-color);
 }
 
-.prayer-header {
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9);
+button {
+    cursor: pointer;
+    font-family: inherit;
 }
 
-.prayer-label {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.9);
+ul {
+    list-style: none;
 }
 
-.prayer-time {
-    margin: 0.9rem;
-    text-align:center;
+.about-text p,
+.location-info p,
+.direction-text p,
+.directions-intro p,
+.prayer-card-note,
+.donation-description,
+.donation-card-description,
+.footer-about p {
+    text-align: justify;
+    hyphens: auto;
 }
 
-.date-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+/* Add subtle serif characteristics to paragraph text for classical British aesthetic */
+p {
+    font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
 }
 
-.date-text {
-    font-size: 1rem;
-    line-height: 1.5;
+/* Enhance readability with slightly increased line height */
+.direction-text p,
+.about-text p,
+.location-info p {
+    line-height: 1.6;
 }
 
-.ordinal-date {
+/* Improve spacing between paragraphs */
+p + p {
+    margin-top: 0.8rem;
+}
+
+/* British-style quotation marks */
+.quote {
+    quotes: '\201C' '\201D' '\2018' '\2019';
+}
+
+/* ===================================
+   2. Typography
+   =================================== */
+h1 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark-color);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
     color: var(--primary-color);
 }
 
-.juma-details {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.9);
+h3 {
+    font-size: 1.8rem;
 }
 
-/*Navigation*/
+h4 {
+    font-size: 1.4rem;
+}
+
+h5 {
+    font-size: 1.2rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+}
+
+.font-title {
+    font-family: 'Cinzel', Georgia, serif;
+}
+
+.font-body {
+    font-family: 'EB Garamond', Georgia, serif;
+}
+
+/* ===================================
+   3. Layout & Grid Utilities
+   =================================== */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.section {
+    padding: 5rem var(--container-padding);
+}
+
+.section-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.section-heading {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-subheading {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* Common grid layouts */
+.grid {
+    display: grid;
+    gap: var(--spacing-xl);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Flex utilities */
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+/* ===================================
+   4. Header & Navigation
+   =================================== */
 .header {
     background-color: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -113,7 +299,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    max-width: 1200px;
+    max-width: var(--container-max-width);
     margin: 0 auto;
 }
 
@@ -173,7 +359,7 @@ body {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    transition: var(--transition);
+    transition: var(--transition-medium);
     position: relative;
 }
 
@@ -185,12 +371,11 @@ body {
     width: 0;
     height: 2px;
     background-color: var(--primary-color);
-    transition: var(--transition);
+    transition: var(--transition-medium);
 }
 
 .nav-link:hover {
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .nav-link:hover::after {
@@ -206,12 +391,100 @@ body {
     cursor: pointer;
 }
 
-/* Hero Section */
+/* ===================================
+   5. Prayer Times Banner
+   =================================== */
+.prayer-times-banner {
+    background-color: rgba(40, 62, 74, 0.9);
+    color: var(--light-color);
+    padding: 0.5rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.prayer-times-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.date-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.date-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+}
+
+.ordinal-date {
+    color: var(--primary-color);
+}
+
+.juma-details {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.prayer-times-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1rem;
+    align-items: center;
+}
+
+.prayer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 65px;
+    text-align: center;
+}
+
+.prayer-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.15rem;
+}
+
+.prayer-value {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+}
+
+/* Prayer time loading/error states */
+.prayer-time-loading {
+    opacity: 0.7;
+    animation: pulsePrayerTime 1.5s infinite;
+}
+
+.prayer-time-error {
+    color: var(--error-color);
+}
+
+@keyframes pulsePrayerTime {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.7; }
+}
+
+/* ===================================
+   6. Hero Section
+   =================================== */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/bridge-street.png');
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/fallback/large/bridge-street.jpg');
     background-size: cover;
     background-position: center;
-    height: 70vh;
+    height: auto;
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,31 +502,51 @@ body {
 .hero-title {
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
 }
 
 .hero-btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     background-color: var(--primary-color);
-    color: var(--accent-color);
+    color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
-    transition: var(--transition);
-    border: 2px solid var(--accent-color);
+    transition: var(--transition-medium);
+    border: 2px solid transparent;
     min-width: 200px;
+    text-align: center;
 }
 
 .hero-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+.hero-btn-outline {
+    background-color: transparent;
+    border-color: var(--light-color);
+}
+
+.hero-btn-outline:hover {
+    background-color: var(--light-color);
+    color: var(--primary-color);
 }
 
 .hero::after {
@@ -269,7 +562,9 @@ body {
     opacity: 0.7;
 }
 
-/* Section Styles */
+/* ===================================
+   7. Section Components
+   =================================== */
 .section {
     padding: 5rem 2rem;
 }
@@ -296,7 +591,9 @@ body {
     opacity: 0.8;
 }
 
-/* Prayer Times Cards */
+/* ===================================
+   8. Prayer Times Section
+   =================================== */
 .prayer-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -308,7 +605,7 @@ body {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: var(--transition);
+    transition: var(--transition-medium);
 }
 
 .prayer-card:hover {
@@ -360,173 +657,29 @@ body {
     border-top: 1px dashed rgba(0,0,0,0.1);
 }
 
-/* Add hover effect to prayer cards */
-.prayer-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.prayer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-/* Business Directory */
-.business-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.business-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: var(--transition);
-}
-
-.business-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.business-image {
-    height: 200px;
-    overflow: hidden;
-}
-
-.business-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
-
-.business-card:hover .business-image img {
-    transform: scale(1.05);
-}
-
-.business-content {
-    padding: 1.5rem;
-}
-
-.business-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: var(--dark-color);
-}
-
-.business-type {
-    display: inline-block;
-    padding: 0.2rem 0.8rem;
-    background-color: var(--accent-color);
-    color: white;
-    border-radius: 3px;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-/* Contact Form */
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: var(--transition);
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(155, 58, 58, 0.1);
-}
-
-/* Footer */
-.footer {
-    background-color: var(--dark-color);
-    color: white;
-    padding: 4rem 0 1rem;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-}
-
-.footer-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-link {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    margin-bottom: 0.8rem;
-    display: block;
-    transition: var(--transition);
-}
-
-.footer-link:hover {
-    color: var(--secondary-color);
-    padding-left: 0.5rem;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    margin-top: 3rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* Location Section */
-.section {
-    padding: 5rem 2rem;
-    background-color: white;
-}
-
-.section-container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* ===================================
+   9. Location & Directions
+   =================================== */
+.location-section {
+    background-color: var(--light-color);
 }
 
 .location-container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
 
 .map-container {
     width: 100%;
-    height: 400px;
+    height: 700px;
     border-radius: 8px;
     overflow: hidden;
 }
 
 .location-info {
     padding: 2rem;
-    background-color: var(--light-color);
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
@@ -597,9 +750,10 @@ body {
 
 .direction-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
+    transition: var(--transition-medium);
 }
 
 .direction-text h3 {
@@ -652,9 +806,22 @@ body {
     font-size: 1rem;
 }
 
-/* Donation Section */
+/* ===================================
+   10. Donation Components
+   =================================== */
 .donation-section {
     background-color: white;
+}
+
+.donation-title {
+    color: var(--primary-color);
+}
+
+.donation-description {
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
+    text-align: center;
+    font-size: 1.1rem;
 }
 
 .donation-cards {
@@ -669,6 +836,48 @@ body {
     background-color: var(--light-color);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: var(--transition-medium);
+}
+
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.donation-card-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.donation-card-description {
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.donation-amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+.donation-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-medium);
+}
+
+.donation-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .donation-progress {
@@ -699,7 +908,19 @@ body {
     border-radius: 0.5rem;
 }
 
-/* Contact Section */
+.progress-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+/* ===================================
+   11. Contact Section
+   =================================== */
+.contact-section {
+    background-color: var(--light-color);
+}
+
 .contact-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -710,22 +931,17 @@ body {
 }
 
 .contact-info {
-    background-color: var(--light-color);
+    background-color: white;
     padding: 2.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.contact-intro {
-    margin-bottom: 2rem;
-    line-height: 1.6;
-    max-width: 600px;
 }
 
 .contact-details {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .contact-item {
@@ -744,6 +960,35 @@ body {
     color: var(--dark-color);
 }
 
+.contact-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.contact-qr img {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+    max-width: 150px;
+    height: auto;
+    transition: var(--transition-medium);
+}
+
+.contact-qr img:hover {
+    transform: scale(1.05);
+}
+
+.qr-caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    font-style: italic;
+    text-align: center;
+}
+
 .contact-form {
     background-color: white;
     padding: 2rem;
@@ -751,98 +996,30 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.qr-code-container {
-    margin-top: 0.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 150px;
-}
-
-.qr-code {
-    border: 1px solid #eee;
-    padding: 5px;
-    background-color: white;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
-}
-
-.qr-code:hover {
-    transform: scale(1.05);
-}
-
-.qr-code-label {
-    font-size: 0.8rem;
-    color: var(--primary-color);
-    margin-top: 0.3rem;
-    text-align: center;
-    width: 100%;
-}
-
-/* Footer */
-.footer {
-    background-color: var(--dark-color);
-    color: white;
-    padding: 4rem 2rem 1rem;
-}
-
-.footer-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-about {
-    max-width: 400px;
-}
-
-.footer-links-col h4 {
-    color: white;
+.form-group {
     margin-bottom: 1.5rem;
 }
 
-.footer-links-col ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-links-col a {
-    color: rgba(255,255,255,0.8);
-    text-decoration: none;
-    display: block;
-    margin-bottom: 0.8rem;
-}
-
-.footer-newsletter input {
+.form-control {
     width: 100%;
     padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 1rem;
+    transition: var(--transition-medium);
 }
 
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    margin-top: 3rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(213, 115, 48, 0.1);
 }
 
-/* About Section */
+/* ===================================
+   12. About Section
+   =================================== */
 .about-section {
     background-color: white;
-    padding: 4rem 0;
 }
 
 .about-content {
@@ -852,10 +1029,21 @@ body {
     margin-top: 2rem;
 }
 
+.about-image {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
 .about-image img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    transition: var(--transition-medium);
+    display: block;
 }
 
 .about-text h3 {
@@ -882,9 +1070,74 @@ body {
 
 .feature-text h4 {
     margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
 }
 
-/* Footer Links */
+/* ===================================
+   13. Footer
+   =================================== */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 4rem 2rem 1rem;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-about {
+    max-width: 400px;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.footer-about p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    font-size: 1rem;
+    transition: var(--transition-medium);
+}
+
+.social-link:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-heading {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
 .footer-links {
     list-style: none;
     padding: 0;
@@ -895,7 +1148,7 @@ body {
     text-decoration: none;
     margin-bottom: 0.8rem;
     display: block;
-    transition: var(--transition);
+    transition: var(--transition-medium);
 }
 
 .footer-links a:hover {
@@ -903,45 +1156,214 @@ body {
     padding-left: 0.5rem;
 }
 
-.footer-newsletter {
-    margin-top: 1.5rem;
+/* Toned down styles for future development resources */
+.footer-links a[class*="external-alert"] {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-sm);
+    padding: 0.5rem;
+    transition: var(--transition-medium);
 }
 
-.newsletter-form {
-    display: flex;
-    gap: 0.5rem;
+.footer-links a[class*="external-alert"]:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    padding-left: 0.5rem;
 }
 
-.newsletter-input {
-    flex: 1;
-    padding: 0.8rem;
+/* Remove the orange background from resource items in footer */
+#resources .footer-links a {
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: var(--spacing-xs) 0;
     border: none;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
 }
 
-.newsletter-btn {
-    padding: 0.8rem;
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===================================
+   14. Animations & Effects
+   =================================== */
+/* Hover effect on cards */
+.prayer-card,
+.donation-card,
+.direction-step {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prayer-card:hover,
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
     background-color: var(--primary-color);
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: var(--transition);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-medium);
+    z-index: 99;
 }
 
-/* Responsive Design */
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Image hover effects */
+.direction-image img:hover,
+.about-image img:hover {
+    transform: scale(1.05);
+}
+
+/* ===================================
+   15. Utility Classes
+   =================================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.text-primary { color: var(--primary-color); }
+.text-secondary { color: var(--secondary-color); }
+.text-accent { color: var(--accent-color); }
+.text-light { color: var(--light-color); }
+.text-dark { color: var(--dark-color); }
+.text-muted { color: rgba(0,0,0,0.6); }
+.text-white { color: white; }
+
+.bg-primary { background-color: var(--primary-color); }
+.bg-secondary { background-color: var(--secondary-color); }
+.bg-accent { background-color: var(--accent-color); }
+.bg-light { background-color: var(--light-color); }
+.bg-dark { background-color: var(--dark-color); }
+.bg-white { background-color: white; }
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.my-1 { margin-top: 1rem; margin-bottom: 1rem; }
+.my-2 { margin-top: 2rem; margin-bottom: 2rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.py-1 { padding-top: 1rem; padding-bottom: 1rem; }
+.py-2 { padding-top: 2rem; padding-bottom: 2rem; }
+.px-1 { padding-left: 1rem; padding-right: 1rem; }
+.px-2 { padding-left: 2rem; padding-right: 2rem; }
+
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+
+.d-none { display: none; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.justify-content-center { justify-content: center; }
+.align-items-center { align-items: center; }
+
+.rounded { border-radius: 4px; }
+.shadow-sm { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+/* ===================================
+   16. Media Queries
+   =================================== */
+@media (max-width: 992px) {
+    .section {
+        padding: 4rem 2rem;
+    }
+
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .location-container,
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .map-container {
+        width: 100%;
+        height: 400px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+}
+
 @media (max-width: 768px) {
+    .hero {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/fallback/medium/bridge-street.jpg');
+    }
+    
     .header-container {
-        flex-direction: column;
-        padding: 1rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1rem;
+    }
+
+    .logo-text {
+        font-size: 0.8rem;
     }
 
     .nav-menu {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        padding: 2rem 0;
+        transition: 0.3s;
+        z-index: 99;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-item {
+        width: 100%;
+        margin: 0;
+        padding: 0.7rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+        order: 2;
+        margin-left: auto; 
     }
 
     .hero-title {
@@ -958,30 +1380,32 @@ body {
 
     .section-heading {
         font-size: 2rem;
+        letter-spacing: 0.02em;
     }
 
+    /* Prayer Times Banner Mobile Styles */
     .prayer-times-container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: 1rem;
+        padding: 0.5rem;
     }
 
     .date-column {
         text-align: center;
+        align-items: center;
     }
     
-    .prayer-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
+    .prayer-times-flex {
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.5rem;
     }
     
-    .prayer-header {
-        grid-column: span 3;
+    .prayer-item {
+        min-width: 55px;
     }
 
-    .prayer-time {
-        margin: 0.3rem 0;
-    }
-
+    /* Prayer Info Items Mobile Styles */
     .prayer-info-item {
         flex-direction: column;
     }
@@ -996,20 +1420,38 @@ body {
         gap: 1rem;
     }
     
-    .location-container {
-        grid-template-columns: 1fr;
+    .location-detail {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .location-details {
+        gap: 1.5rem;
+    }
+    
+    .location-icon {
+        margin-bottom: 0.5rem;
     }
 
     .contact-container {
         grid-template-columns: 1fr;
     }
 
-    .qr-code-container {
-        margin: 0.8rem auto;
-    }
-
     .contact-info {
         padding: 1.5rem;
+    }
+
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+        margin-bottom: 0.5rem;
     }
     
     .contact-qr {
@@ -1042,25 +1484,93 @@ body {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-
-    .about-content {
-        grid-template-columns: 1fr;
-    }
     
     /* Updated responsive styling for directions section */
     .direction-step {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .directions-note {
+        padding: 1.5rem;
     }
     
     .direction-image {
-        height: 250px;
+        height: 200px;
+    }
+    
+    .feature-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: var(--spacing-md);
+    }
+    
+    .feature-icon {
+        margin-bottom: var(--spacing-sm);
     }
 }
 
-/* Utility Classes */
-.text-center { text-align: center; }
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mb-1 { margin-bottom: 1rem; }
-.mb-2 { margin-bottom: 2rem; }
+/* Very Small Screens */
+@media (max-width: 480px) {
+    .hero {
+        background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/fallback/small/bridge-street.jpg');
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-btn {
+        width: 100%;
+    }
+    
+    .prayer-times-flex {
+        gap: 0.3rem;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .prayer-item {
+        min-width: auto;
+        flex: 1;
+    }
+    
+    .prayer-name {
+        font-size: 0.7rem;
+    }
+    
+    .prayer-value {
+        font-size: 0.8rem;
+    }
+    
+    .date-text {
+        font-size: 0.9rem;
+    }
+    
+    .juma-details {
+        font-size: 0.8rem;
+    }
+    
+    .section-heading {
+        font-size: 1.8rem;
+    }
+    
+    .section-subheading {
+        font-size: 1rem;
+    }
+    
+    .footer-about,
+    .footer-links-col {
+        text-align: center;
+    }
+    
+    .footer-heading::after {
+        margin: 8px auto 0;
+    }
+}
