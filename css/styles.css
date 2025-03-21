@@ -652,7 +652,7 @@ h6 {
 }
 
 .prayer-card-note {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     color: var(--text-muted);
     font-style: italic;
     padding-top: var(--spacing-xs);

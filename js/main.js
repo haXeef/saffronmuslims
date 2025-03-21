@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Smooth Scrolling for Internal Links
+// Modified Smooth Scrolling for Internal Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -81,10 +81,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            targetElement.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
+            // First, cancel any ongoing scroll momentum by stopping at current position
+            window.scrollTo({
+                top: window.pageYOffset,
+                behavior: 'auto'
             });
+            
+            // Then, after a very brief delay, scroll to the target
+            setTimeout(() => {
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }, 10);
             
             // Close mobile menu if open
             if (navMenu.classList.contains('active')) {
