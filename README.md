@@ -23,12 +23,14 @@ This project provides a website for the Saffron Walden Muslim Community. The sit
 - Font Awesome for icons
 - Google Maps embed
 - Aladhan API for prayer times
+- CloudFlare Analytics for site metrics
 
 ## Project Structure
 
 ```
 saffronmuslims/
 ├── css/
+│   ├── cookie-notice.css
 │   └── styles.css
 ├── images/
 │   ├── fallback/
@@ -43,6 +45,7 @@ saffronmuslims/
 │   ├── Castle-Street-SW-Gordon-Ridgewell.jpg
 │   └── workinglogo.png
 ├── js/
+│   ├── cookie-notice.js
 │   ├── main.js
 │   └── prayer-times.js
 ├── index.html

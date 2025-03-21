@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
 /* 
  * Saffron Walden Muslim Community Website
- * Main Stylesheet
+ * Enhanced Main Stylesheet
  * 
  * Table of Contents:
  * 1. CSS Variables & Base Styles
@@ -9,29 +11,32 @@
  * 4. Header & Navigation
  * 5. Prayer Times Banner
  * 6. Hero Section
- * 7. Section Components
- * 8. Prayer Times Section
- * 9. Location & Directions
- * 10. Donation Components
- * 11. Contact Section
- * 12. About Section
- * 13. Footer
- * 14. Animations & Effects
- * 15. Utility Classes
- * 16. Media Queries
+ * 7. Prayer Times Section
+ * 8. Location & Directions
+ * 9. Donation Components
+ * 10. Contact Section
+ * 11. About Section
+ * 12. Footer
+ * 13. Animations & Effects
+ * 14. Utility Classes
+ * 15. Media Queries
  */
 
 /* ===================================
    1. CSS Variables & Base Styles
    =================================== */
    :root {
-    /* Primary Color Palette - Inspired by local Saffron Walden architecture */
-    --primary-color: #D57330; /* Terracotta/orange from local buildings */
+    /* Enhanced Color Palette - refined for better contrast and harmony */
+    --primary-color: #D57330; /* Original terracotta/orange */
+    --primary-dark: #B84A00; /* Darker variant for better text contrast */
+    --primary-light: #F59A60; /* Lighter variant for hover states */
     --secondary-color: #8B4513; /* Saddle brown from timber frames */
     --accent-color: #283e4a; /* Tudor timber dark */
     --light-color: #f2ede4; /* Off-white/cream */
+    --light-alt: #F8F5F0; /* Slightly lighter variant for card backgrounds */
     --dark-color: #292218; /* Deep brown */
     --text-color: #333333;
+    --text-muted: #666666;
     
     /* Supportive Pastel Palette */
     --pastel-pink: #e6c6c9;
@@ -45,32 +50,43 @@
     --error-color: #d25757;
     --info-color: #2196F3;
     
-    /* Spacing Variables */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-xxl: 3rem;
+    /* Standardized Spacing System - ensuring 8px grid */
+    --spacing-xxs: 0.25rem; /* 4px */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-xxl: 4rem;    /* 64px */
+    
+    /* Typography Scale - improved for hierarchy */
+    --text-xs: 0.75rem;     /* 12px */
+    --text-sm: 0.875rem;    /* 14px */
+    --text-base: 1rem;      /* 16px */
+    --text-md: 1.125rem;    /* 18px */
+    --text-lg: 1.25rem;     /* 20px */
+    --text-xl: 1.5rem;      /* 24px */
+    --text-2xl: 2rem;       /* 32px */
+    --text-3xl: 2.5rem;     /* 40px */
     
     /* Border Radius */
-    --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
     
-    /* Shadows */
-    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+    /* Enhanced Shadows */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.10), 0 4px 10px rgba(0, 0, 0, 0.05);
     
     /* Transitions */
-    --transition-fast: all 0.2s ease;
-    --transition-medium: all 0.3s ease;
-    --transition-slow: all 0.5s ease;
+    --transition-fast: 150ms ease;
+    --transition-medium: 300ms ease;
+    --transition-slow: 500ms ease;
     
     /* Container Widths */
     --container-max-width: 1200px;
-    --container-padding: 2rem;
+    --container-padding: var(--spacing-md);
 }
 
 /* Reset and Base Styles */
@@ -82,14 +98,16 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px; /* Explicitly set base font size */
 }
 
 body {
     background-color: var(--light-color);
     color: var(--text-color);
-    line-height: 1.4;
+    line-height: 1.5;
     font-family: 'EB Garamond', 'Georgia', serif;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 img {
@@ -104,18 +122,21 @@ a {
 }
 
 a:hover {
-    color: var(--secondary-color);
+    color: var(--primary-dark);
 }
 
 button {
     cursor: pointer;
     font-family: inherit;
+    border: none;
+    background: none;
 }
 
 ul {
     list-style: none;
 }
 
+/* Consistent text alignment for descriptive text */
 .about-text p,
 .location-info p,
 .direction-text p,
@@ -126,18 +147,14 @@ ul {
 .footer-about p {
     text-align: justify;
     hyphens: auto;
-}
-
-/* Add subtle serif characteristics to paragraph text for classical British aesthetic */
-p {
-    font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    line-height: 1.6;
 }
 
 /* Enhance readability with slightly increased line height */
-.direction-text p,
-.about-text p,
-.location-info p {
+p {
     line-height: 1.6;
+    margin-bottom: var(--text-base);
+    font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
 }
 
 /* Improve spacing between paragraphs */
@@ -153,50 +170,41 @@ p + p {
 /* ===================================
    2. Typography
    =================================== */
-h1 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', Georgia, serif;
     font-weight: 700;
     line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+}
+
+h1 {
+    font-size: var(--text-3xl);
     color: var(--primary-color);
-    margin-bottom: var(--spacing-md);
-}
-
-h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', Georgia, serif;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--dark-color);
-    margin-bottom: var(--spacing-md);
-}
-
-h1 {
-    font-size: 3rem;
 }
 
 h2 {
-    font-size: 2.5rem;
-    color: var(--primary-color);
+    font-size: var(--text-2xl);
+    color: var(--primary-dark);
 }
 
 h3 {
-    font-size: 1.8rem;
+    font-size: var(--text-xl);
+    color: var(--dark-color);
 }
 
 h4 {
-    font-size: 1.4rem;
+    font-size: var(--text-lg);
+    color: var(--dark-color);
 }
 
 h5 {
-    font-size: 1.2rem;
+    font-size: var(--text-md);
+    color: var(--dark-color);
 }
 
 h6 {
-    font-size: 1rem;
-}
-
-p {
-    margin-bottom: var(--spacing-md);
-    line-height: 1.6;
+    font-size: var(--text-base);
+    color: var(--dark-color);
 }
 
 .font-title {
@@ -211,13 +219,14 @@ p {
    3. Layout & Grid Utilities
    =================================== */
 .container {
+    width: 100%;
     max-width: var(--container-max-width);
     margin: 0 auto;
     padding: 0 var(--container-padding);
 }
 
 .section {
-    padding: 5rem var(--container-padding);
+    padding: var(--spacing-xl) var(--spacing-lg);
 }
 
 .section-container {
@@ -227,25 +236,25 @@ p {
 
 .section-title {
     text-align: center;
-    margin-bottom: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xl);
 }
 
 .section-heading {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
+    font-size: var(--text-2xl);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-xs);
 }
 
 .section-subheading {
     color: var(--text-color);
-    font-size: 1.1rem;
+    font-size: var(--text-md);
     opacity: 0.8;
 }
 
 /* Common grid layouts */
 .grid {
     display: grid;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
 }
 
 .grid-2 {
@@ -298,7 +307,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
     max-width: var(--container-max-width);
     margin: 0 auto;
 }
@@ -307,25 +316,25 @@ p {
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: var(--text-md);
     font-weight: 600;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 }
 
 .logo-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px; /* Adjust this width as needed */
-    height: 50px; /* Adjust this height as needed */
-    overflow: hidden; /* This prevents image from spilling out */
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
 }
 
 .logo-image {
     width: 100%;
     height: auto;
     max-height: 100%;
-    object-fit: contain; /* This ensures the image keeps its aspect ratio */
+    object-fit: contain;
 }
 
 .logo-text {
@@ -334,7 +343,7 @@ p {
 }
 
 .logo-primary {
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 700;
     color: var(--primary-color);
     letter-spacing: 0.1em;
@@ -343,7 +352,7 @@ p {
 
 .logo-secondary {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     color: var(--secondary-color);
     letter-spacing: 0.075em;
@@ -361,12 +370,13 @@ p {
     font-weight: 500;
     transition: var(--transition-medium);
     position: relative;
+    padding: var(--spacing-xxs) 0;
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
     height: 2px;
@@ -387,7 +397,7 @@ p {
     background: none;
     border: none;
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
     cursor: pointer;
 }
 
@@ -395,9 +405,9 @@ p {
    5. Prayer Times Banner
    =================================== */
 .prayer-times-banner {
-    background-color: rgba(40, 62, 74, 0.9);
+    background-color: rgba(40, 62, 74, 0.95);
     color: var(--light-color);
-    padding: 0.5rem 0;
+    padding: var(--spacing-xs) 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -406,37 +416,48 @@ p {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 var(--container-padding);
 }
 
 .date-column {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: var(--spacing-xxs);
 }
 
 .date-text {
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.5;
     font-variant-numeric: tabular-nums;
 }
 
 .ordinal-date {
-    color: var(--primary-color);
+    color: var(--primary-light);
+    font-weight: 500;
 }
 
 .juma-details {
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: rgba(255, 255, 255, 0.9);
+}
+
+.juma-details a {
+    color: var(--primary-light);
+    text-decoration: italic;
+    transition: var(--transition-fast);
+}
+
+.juma-details a:hover {
+    color: var(--primary-light);
 }
 
 .prayer-times-flex {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     align-items: center;
 }
 
@@ -449,15 +470,16 @@ p {
 }
 
 .prayer-name {
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0.15rem;
 }
 
 .prayer-value {
-    font-size: 1rem;
-    margin-top: 0.25rem;
+    font-size: var(--text-base);
+    margin-top: var(--spacing-xxs);
+    font-weight: 500;
 }
 
 /* Prayer time loading/error states */
@@ -480,7 +502,7 @@ p {
    6. Hero Section
    =================================== */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/fallback/large/bridge-street.jpg');
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/fallback/large/bridge-street.jpg');
     background-size: cover;
     background-position: center;
     height: auto;
@@ -491,25 +513,29 @@ p {
     text-align: center;
     color: white;
     position: relative;
-    padding: 2rem;
+    padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
 .hero-content {
     max-width: 800px;
-    padding: 0 2rem;
+    padding: 0 var(--spacing-lg);
 }
 
 .hero-title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    color: var(--primary-light);
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: var(--text-md);
+    margin-bottom: var(--spacing-lg);
     opacity: 0.9;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-buttons {
@@ -520,11 +546,11 @@ p {
 
 .hero-btn {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     background-color: var(--primary-color);
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     font-weight: bold;
     transition: var(--transition-medium);
     border: 2px solid transparent;
@@ -535,8 +561,8 @@ p {
 .hero-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    background-color: var(--light-color);
-    color: var(--primary-color);
+    color: white; 
+    background-color: var(--primary-dark);
 }
 
 .hero-btn-outline {
@@ -563,150 +589,137 @@ p {
 }
 
 /* ===================================
-   7. Section Components
-   =================================== */
-.section {
-    padding: 5rem 2rem;
-}
-
-.section-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-heading {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.section-subheading {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    opacity: 0.8;
-}
-
-/* ===================================
-   8. Prayer Times Section
+   7. Prayer Times Section
    =================================== */
 .prayer-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
 .prayer-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 400px;
     background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     transition: var(--transition-medium);
 }
 
 .prayer-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-lg);
 }
 
 .prayer-card-title {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    font-size: var(--text-lg);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
     text-align: center;
 }
 
 .prayer-info {
-    margin-bottom: 1.5rem;
+    flex: 1;
+    margin-bottom: var(--spacing-md);
 }
 
 .prayer-info-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
     border-bottom: 1px solid rgba(0,0,0,0.05);
-    font-weight: normal;
 }
 
 .prayer-info-item:last-child {
     margin-bottom: 0;
+    border-bottom: none;
 }
 
 .prayer-info-label {
     font-weight: 600;
     color: var(--dark-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-sm);
 }
 
 .prayer-info-labels {
     font-weight: normal;
     color: var(--text-color);
-    margin-right: 1rem;
+    margin-right: var(--spacing-sm);
 }
 
 .prayer-card-note {
-    font-size: 0.9rem;
-    color: rgba(0,0,0,0.6);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
     font-style: italic;
-    padding-top: 0.5rem;
+    padding-top: var(--spacing-xs);
     border-top: 1px dashed rgba(0,0,0,0.1);
+    margin-top: auto;
 }
 
 /* ===================================
-   9. Location & Directions
+   8. Location & Directions
    =================================== */
 .location-section {
-    background-color: var(--light-color);
+    background-color: white;
 }
 
 .location-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
 .map-container {
     width: 100%;
-    height: 700px;
-    border-radius: 8px;
+    height: 100%;
+    min-height: 400px;
+    border-radius: var(--radius-md);
     overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: flex;
 }
 
 .location-info {
-    padding: 2rem;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: var(--spacing-lg);
+    background-color: var(--light-alt);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
 }
 
 .location-details {
-    margin-top: 2rem;
+    margin-top: var(--spacing-lg);
     display: grid;
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
 .location-detail {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     align-items: flex-start;
 }
 
 .location-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
+    flex-shrink: 0;
 }
 
 .location-text h4 {
     color: var(--dark-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-xs);
 }
 
-/* Enhanced Directions Section Styles - Simplified */
+.location-text p {
+    margin-bottom: var(--spacing-xxs);
+}
+
+/* Enhanced Directions Section Styles */
 .directions-section {
     background-color: var(--light-color);
     border-top: 3px solid var(--primary-color);
@@ -714,38 +727,38 @@ p {
 }
 
 .directions-intro {
-    max-width: 800px;
-    margin: 0 auto 3rem;
+    max-width: 100%;
+    margin: 0 auto var(--spacing-xl);
     text-align: center;
-    font-size: 1.2rem;
+    font-size: var(--text-md);
     color: var(--dark-color);
     line-height: 1.7;
-    padding: 1.5rem;
+    padding: var(--spacing-md);
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
 .directions-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
 }
 
 .direction-step {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-rows: 300px auto;
+    gap: var(--spacing-lg);
     background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
 .direction-image {
     height: 300px;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 .direction-image img {
@@ -756,11 +769,20 @@ p {
     transition: var(--transition-medium);
 }
 
+.direction-image:hover img {
+    transform: scale(1.05);
+}
+
+.direction-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .direction-text h3 {
     display: flex;
     align-items: center;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
     color: var(--dark-color);
 }
 
@@ -773,17 +795,18 @@ p {
     background-color: var(--primary-color);
     color: white;
     border-radius: 50%;
-    margin-right: 0.75rem;
-    font-size: 1.2rem;
+    margin-right: var(--spacing-xs);
+    font-size: var(--text-md);
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 .directions-note {
-    margin-top: 3rem;
+    margin-top: var(--spacing-xl);
     background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
 /* Directions List Styling */
@@ -793,7 +816,7 @@ p {
 }
 
 .directions-list li {
-    margin-bottom: 0.8rem;
+    margin-bottom: var(--spacing-sm);
     color: var(--text-color);
     display: flex;
     align-items: flex-start;
@@ -801,98 +824,108 @@ p {
 
 .note-icon {
     color: var(--primary-color);
-    margin-right: 0.75rem;
+    margin-right: var(--spacing-xs);
     width: 18px;
-    font-size: 1rem;
+    font-size: var(--text-base);
+    flex-shrink: 0;
 }
 
 /* ===================================
-   10. Donation Components
+   9. Donation Components
    =================================== */
 .donation-section {
     background-color: white;
 }
 
 .donation-title {
-    color: var(--primary-color);
+    color: var(--primary-dark);
 }
 
 .donation-description {
     max-width: 800px;
-    margin: 0 auto var(--spacing-xl);
+    margin: 0 auto var(--spacing-lg);
     text-align: center;
-    font-size: 1.1rem;
+    font-size: var(--text-md);
+    color: var(--text-color);
 }
 
 .donation-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin: 3rem 0;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
 }
 
 .donation-card {
-    padding: 2rem;
-    background-color: var(--light-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+    padding: var(--spacing-lg);
+    background-color: var(--light-alt);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
     text-align: center;
     transition: var(--transition-medium);
 }
 
 .donation-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-shadow: var(--shadow-lg);
 }
 
 .donation-card-title {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: var(--spacing-md);
+    font-size: var(--text-lg);
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-sm);
 }
 
 .donation-card-description {
-    margin-bottom: var(--spacing-lg);
+    flex: 1;
+    margin-bottom: var(--spacing-md);
     color: var(--text-color);
     line-height: 1.6;
 }
 
 .donation-amount {
-    font-size: 1.8rem;
+    font-size: var(--text-xl);
     font-weight: bold;
     color: var(--primary-color);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
 }
 
 .donation-btn {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    padding: var(--spacing-xs) var(--spacing-md);
     background-color: var(--primary-color);
     color: white;
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--radius-sm);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-medium);
+    margin-top: auto;
 }
 
 .donation-btn:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-dark);
     transform: translateY(-2px);
+    color: white;
 }
 
 .donation-progress {
     max-width: 800px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background-color: var(--light-color);
-    border-radius: 8px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-lg);
+    background-color: var(--light-alt);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
 .progress-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .progress-bar-container {
@@ -910,12 +943,13 @@ p {
 
 .progress-text {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: var(--text-sm);
     color: var(--text-color);
+    margin-top: var(--spacing-xs);
 }
 
 /* ===================================
-   11. Contact Section
+   10. Contact Section
    =================================== */
 .contact-section {
     background-color: var(--light-color);
@@ -923,89 +957,54 @@ p {
 
 .contact-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
+    gap: var(--spacing-xl);
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 2rem;
 }
 
 .contact-info {
     background-color: white;
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-details {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
 }
 
 .contact-item {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     align-items: flex-start;
 }
 
 .contact-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
+    flex-shrink: 0;
 }
 
 .contact-text h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-xs);
     color: var(--dark-color);
-}
-
-.contact-qr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1.5rem 0;
-}
-
-.contact-qr img {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    background-color: white;
-    border-radius: 4px;
-    max-width: 150px;
-    height: auto;
-    transition: var(--transition-medium);
-}
-
-.contact-qr img:hover {
-    transform: scale(1.05);
-}
-
-.qr-caption {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--dark-color);
-    font-style: italic;
-    text-align: center;
-}
-
-.contact-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--spacing-md);
 }
 
 .form-control {
     width: 100%;
-    padding: 0.8rem;
+    padding: var(--spacing-sm);
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-base);
     transition: var(--transition-medium);
 }
 
@@ -1016,7 +1015,7 @@ p {
 }
 
 /* ===================================
-   12. About Section
+   11. About Section
    =================================== */
 .about-section {
     background-color: white;
@@ -1025,69 +1024,78 @@ p {
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 2rem;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
 }
 
 .about-image {
-    border-radius: var(--border-radius-md);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    box-shadow: var(--shadow-md);
+    height: 100%;
 }
 
 .about-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     transition: var(--transition-medium);
-    display: block;
+}
+
+.about-image:hover img {
+    transform: scale(1.03);
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .about-text h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
 }
 
 .feature-list {
-    margin-top: 2rem;
+    margin-top: var(--spacing-lg);
     display: grid;
-    gap: 2rem;
+    gap: var(--spacing-lg);
 }
 
 .feature-item {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     align-items: flex-start;
 }
 
 .feature-icon {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: var(--text-xl);
+    flex-shrink: 0;
 }
 
 .feature-text h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-xs);
     font-weight: 600;
     color: var(--dark-color);
 }
 
 /* ===================================
-   13. Footer
+   12. Footer
    =================================== */
 .footer {
     background-color: var(--dark-color);
     color: white;
-    padding: 4rem 2rem 1rem;
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-sm);
+    margin-top: var(--spacing-xl);
 }
 
 .footer-container {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
+    gap: var(--spacing-xl);
+    max-width: var(--container-max-width);
     margin: 0 auto;
 }
 
@@ -1096,22 +1104,22 @@ p {
 }
 
 .footer-logo {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-light);
     font-weight: 600;
 }
 
 .footer-about p {
     color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-sm);
     line-height: 1.6;
 }
 
 .social-links {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
 }
 
 .social-link {
@@ -1123,7 +1131,7 @@ p {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     border-radius: 50%;
-    font-size: 1rem;
+    font-size: var(--text-base);
     transition: var(--transition-medium);
 }
 
@@ -1134,8 +1142,20 @@ p {
 
 .footer-heading {
     color: white;
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-md);
+    position: relative;
+    display: inline-block;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
 }
 
 .footer-links {
@@ -1146,102 +1166,84 @@ p {
 .footer-links a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    margin-bottom: 0.8rem;
+    margin-bottom: var(--spacing-sm);
     display: block;
     transition: var(--transition-medium);
+    padding: var(--spacing-xxs) 0;
 }
 
 .footer-links a:hover {
     color: white;
-    padding-left: 0.5rem;
+    padding-left: var(--spacing-xs);
 }
 
 /* Toned down styles for future development resources */
 .footer-links a[class*="external-alert"] {
     color: rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.05);
-    border-radius: var(--border-radius-sm);
-    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs);
     transition: var(--transition-medium);
 }
 
 .footer-links a[class*="external-alert"]:hover {
     color: rgba(255, 255, 255, 0.7);
     background-color: rgba(255, 255, 255, 0.08);
-    padding-left: 0.5rem;
+    padding-left: var(--spacing-sm);
 }
 
 /* Remove the orange background from resource items in footer */
 #resources .footer-links a {
     background-color: transparent !important;
     color: rgba(255, 255, 255, 0.6) !important;
-    padding: var(--spacing-xs) 0;
+    padding: var(--spacing-xxs) 0;
     border: none;
 }
 
 .footer-bottom {
     text-align: center;
-    padding-top: 2rem;
-    margin-top: 3rem;
+    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
     border-top: 1px solid rgba(255,255,255,0.1);
     color: rgba(255, 255, 255, 0.7);
 }
 
 /* ===================================
-   14. Animations & Effects
+   13. Animations & Effects
    =================================== */
-/* Hover effect on cards */
-.prayer-card,
-.donation-card,
-.direction-step {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Smooth reveal animation for sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.prayer-card:hover,
-.donation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
+/* Animation delays for staggered effects */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
 
-/* Back to top button */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 40px;
-    height: 40px;
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    box-shadow: var(--shadow-md);
+/* Initial state for scroll-triggered animations */
+.animate-on-scroll {
     opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-medium);
-    z-index: 99;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.back-to-top.visible {
+.animate-on-scroll.visible {
     opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-}
-
-/* Image hover effects */
-.direction-image img:hover,
-.about-image img:hover {
-    transform: scale(1.05);
+    transform: translateY(0);
 }
 
 /* ===================================
-   15. Utility Classes
+   14. Utility Classes
    =================================== */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
@@ -1253,7 +1255,7 @@ p {
 .text-accent { color: var(--accent-color); }
 .text-light { color: var(--light-color); }
 .text-dark { color: var(--dark-color); }
-.text-muted { color: rgba(0,0,0,0.6); }
+.text-muted { color: var(--text-muted); }
 .text-white { color: white; }
 
 .bg-primary { background-color: var(--primary-color); }
@@ -1263,18 +1265,23 @@ p {
 .bg-dark { background-color: var(--dark-color); }
 .bg-white { background-color: white; }
 
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-.mb-1 { margin-bottom: 1rem; }
-.mb-2 { margin-bottom: 2rem; }
-.my-1 { margin-top: 1rem; margin-bottom: 1rem; }
-.my-2 { margin-top: 2rem; margin-bottom: 2rem; }
+.mt-1 { margin-top: var(--spacing-sm); }
+.mt-2 { margin-top: var(--spacing-md); }
+.mt-3 { margin-top: var(--spacing-lg); }
+.mb-1 { margin-bottom: var(--spacing-sm); }
+.mb-2 { margin-bottom: var(--spacing-md); }
+.mb-3 { margin-bottom: var(--spacing-lg); }
+.my-1 { margin-top: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
+.my-2 { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.my-3 { margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
-.py-1 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-2 { padding-top: 2rem; padding-bottom: 2rem; }
-.px-1 { padding-left: 1rem; padding-right: 1rem; }
-.px-2 { padding-left: 2rem; padding-right: 2rem; }
+.py-1 { padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm); }
+.py-2 { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
+.py-3 { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
+.px-1 { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
+.px-2 { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+.px-3 { padding-left: var(--spacing-lg); padding-right: var(--spacing-lg); }
 
 .w-100 { width: 100%; }
 .h-100 { height: 100%; }
@@ -1286,15 +1293,47 @@ p {
 .justify-content-center { justify-content: center; }
 .align-items-center { align-items: center; }
 
-.rounded { border-radius: 4px; }
-.shadow-sm { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.rounded { border-radius: var(--radius-sm); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
 
 /* ===================================
-   16. Media Queries
+   15. Media Queries
    =================================== */
+/* Large screens */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .animate-fade-in,
+    .animate-on-scroll {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --container-padding: var(--spacing-md);
+    }
+    
+    .hero-title {
+        font-size: calc(var(--text-3xl) - 0.25rem);
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero {
+        padding: calc(var(--spacing-xxl) * 2.5) var(--spacing-lg); /* Even more padding on very large screens */
+    }
+}
+
+/* Tablet Landscape */
 @media (max-width: 992px) {
     .section {
-        padding: 4rem 2rem;
+        padding: var(--spacing-lg) var(--spacing-md);
     }
 
     .footer-container {
@@ -1304,17 +1343,28 @@ p {
     .location-container,
     .about-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: var(--spacing-lg);
     }
     
     .map-container {
-        width: 100%;
         height: 400px;
-        border-radius: 8px;
-        overflow: hidden;
+    }
+    
+    .prayer-card,
+    .donation-card {
+        min-height: 350px;
+    }
+    
+    .hero-title {
+        font-size: calc(var(--text-2xl) + 0.25rem);
+    }
+    
+    .direction-step {
+        min-height: 280px;
     }
 }
 
+/* Tablet Portrait / Mobile Landscape */
 @media (max-width: 768px) {
     .hero {
         background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/fallback/medium/bridge-street.jpg');
@@ -1324,11 +1374,11 @@ p {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0.8rem 1rem;
+        padding: var(--spacing-sm) var(--spacing-md);
     }
 
     .logo-text {
-        font-size: 0.8rem;
+        font-size: var(--text-sm);
     }
 
     .nav-menu {
@@ -1339,7 +1389,7 @@ p {
         background-color: white;
         width: 100%;
         box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        padding: 2rem 0;
+        padding: var(--spacing-lg) 0;
         transition: 0.3s;
         z-index: 99;
     }
@@ -1351,7 +1401,7 @@ p {
     .nav-item {
         width: 100%;
         margin: 0;
-        padding: 0.7rem 2rem;
+        padding: var(--spacing-xs) var(--spacing-lg);
         border-bottom: 1px solid rgba(0,0,0,0.05);
     }
 
@@ -1367,27 +1417,22 @@ p {
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: var(--text-2xl);
     }
 
     .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .section {
-        padding: 3rem 1rem;
+        font-size: var(--text-base);
     }
 
     .section-heading {
-        font-size: 2rem;
-        letter-spacing: 0.02em;
+        font-size: var(--text-xl);
     }
 
     /* Prayer Times Banner Mobile Styles */
     .prayer-times-container {
         flex-direction: column;
-        gap: 1rem;
-        padding: 0.5rem;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-xs);
     }
 
     .date-column {
@@ -1398,7 +1443,7 @@ p {
     .prayer-times-flex {
         justify-content: center;
         width: 100%;
-        margin-top: 0.5rem;
+        margin-top: var(--spacing-xs);
     }
     
     .prayer-item {
@@ -1407,133 +1452,101 @@ p {
 
     /* Prayer Info Items Mobile Styles */
     .prayer-info-item {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
     }
     
-    .prayer-info-item span:last-child {
-        text-align: left;
-        margin-top: 0.3rem;
+    .prayer-card, 
+    .donation-card {
+        min-height: auto;
     }
 
     .progress-stats {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: var(--spacing-sm);
     }
     
     .location-detail {
-        flex-direction: column;
-        align-items: flex-start;
         text-align: left;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .location-details {
-        gap: 1.5rem;
     }
     
-    .location-icon {
-        margin-bottom: 0.5rem;
-    }
-
     .contact-container {
         grid-template-columns: 1fr;
     }
-
-    .contact-info {
-        padding: 1.5rem;
-    }
-
-    .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 1.5rem;
-    }
     
-    .contact-icon {
-        margin-bottom: 0.5rem;
-    }
-    
-    .contact-qr {
-        margin: 1.5rem auto 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
-    
-    .contact-qr img {
-        border: 1px solid #ddd;
-        padding: 0.5rem;
-        background-color: white;
-        border-radius: 4px;
-        max-width: 150px;
-        height: auto;
-    }
-    
-    .qr-caption {
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
-        color: var(--dark-color);
-        font-style: italic;
-        text-align: center;
-    }
-    
-    .footer-container {
+    .directions-steps {
         grid-template-columns: 1fr;
-        gap: 2rem;
     }
-    
-    /* Updated responsive styling for directions section */
+
     .direction-step {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 1.5rem;
-    }
-
-    .directions-note {
-        padding: 1.5rem;
+        display:flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
     }
     
     .direction-image {
         height: 200px;
     }
     
-    .feature-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: var(--spacing-md);
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
     }
     
-    .feature-icon {
-        margin-bottom: var(--spacing-sm);
+    .footer-about {
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-links-col {
+        text-align: center;
+    }
+    
+    .footer-links a {
+        text-align: center;
     }
 }
 
-/* Very Small Screens */
+@media (min-width: 768px) {
+    .hero {
+        padding: calc(var(--spacing-xxl) * 2) var(--spacing-lg); /* Double padding on larger screens */
+    }
+}
+
+/* Small Mobile */
 @media (max-width: 480px) {
     .hero {
         background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/fallback/small/bridge-street.jpg');
+        min-height: 350px;
+        padding: var(--spacing-md);
     }
     
     .hero-title {
-        font-size: 1.8rem;
+        font-size: calc(var(--text-xl) + 0.25rem);
     }
     
     .hero-buttons {
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--spacing-sm);
     }
     
     .hero-btn {
         width: 100%;
+        min-width: auto;
     }
     
     .prayer-times-flex {
-        gap: 0.3rem;
+        gap: var(--spacing-xxs);
         justify-content: space-between;
-        width: 100%;
     }
     
     .prayer-item {
@@ -1542,35 +1555,68 @@ p {
     }
     
     .prayer-name {
-        font-size: 0.7rem;
+        font-size: calc(var(--text-xs) + 0.1rem);
     }
     
     .prayer-value {
-        font-size: 0.8rem;
+        font-size: var(--text-sm);
     }
     
     .date-text {
-        font-size: 0.9rem;
+        font-size: var(--text-sm);
     }
     
     .juma-details {
-        font-size: 0.8rem;
+        font-size: var(--text-xs);
     }
     
     .section-heading {
-        font-size: 1.8rem;
+        font-size: var(--text-lg);
     }
     
-    .section-subheading {
-        font-size: 1rem;
+    .section {
+        padding: var(--spacing-md) var(--spacing-sm);
     }
     
-    .footer-about,
-    .footer-links-col {
-        text-align: center;
+    .prayer-card,
+    .donation-card,
+    .location-info,
+    .contact-info,
+    .contact-form,
+    .direction-step {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Print styles for prayer times */
+@media print {
+    .prayer-section {
+        page-break-inside: avoid;
     }
     
-    .footer-heading::after {
-        margin: 8px auto 0;
+    .header,
+    .hero,
+    .footer,
+    .location-section,
+    .directions-section,
+    .donation-section,
+    .contact-section,
+    .about-section,
+    .back-to-top {
+        display: none;
+    }
+    
+    .prayer-times-banner {
+        background-color: white;
+        color: black;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .prayer-item {
+        color: black;
+    }
+    
+    .prayer-name {
+        color: var(--dark-color);
     }
 }
