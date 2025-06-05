@@ -22,8 +22,8 @@ This project provides a website for the Saffron Walden Muslim Community. The sit
 - Vanilla JavaScript
 - Font Awesome for icons
 - Google Maps embed
-- Aladhan API for prayer times
-- CloudFlare Analytics for site metrics
+- Prayer times data provided by the Aladhan API
+- Cloudflare Analytics for site metrics
 
 ## Project Structure
 
@@ -93,7 +93,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License. All code and customizations are original. External services and libraries are used with appropriate attribution.
 
 ## Acknowledgments
 

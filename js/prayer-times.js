@@ -16,7 +16,6 @@ class PrayerTimesCalculator {
         try {
             // Try to load from cache first
             if (this.loadFromCache()) {
-                console.log('Prayer times loaded from cache');
                 return;
             }
 
@@ -209,6 +208,7 @@ class PrayerTimesCalculator {
         try {
             localStorage.setItem(this.CACHE_KEY, JSON.stringify(data));
             localStorage.setItem(this.CACHE_TIMESTAMP_KEY, Date.now().toString());
+            // Optionally trigger event for service worker caching after saveToCache()
         } catch (error) {
             console.warn('Failed to cache prayer times:', error);
         }

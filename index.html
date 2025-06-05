@@ -48,10 +48,14 @@
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9aae5e2cec8b4fba9da7926a6d3e247c"}'></script>
     <!-- End Cloudflare Web Analytics -->
+
+    <!-- Preload key assets -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="images/fallback/large/bridge-street.jpg" as="image">
 </head>
 
 <body>
-
+    
     <!-- Prayer Times Banner -->
     <div class="prayer-times-banner">
         <div class="prayer-times-container">
@@ -192,17 +196,21 @@
                         </div>
                     </div>
                     <p class="prayer-card-note">Please arrive 10–15 minutes early to prepare for prayer.</p>
-                    <h3 class="prayer-card-title">Ramadan</h3>
+                    <h3 class="prayer-card-title">Eid al-Adha</h3>
                     <div class="prayer-info">
                         <div class="prayer-info-item">
-                            <span class="prayer-info-label">Taraweeh:</span>
-                            <span>There are no nightly prayers organised in Saffron Walden this year.</span>
-                        </div>                    
-                        <p class="prayer-card-note">Please consider your nearest masjid in Cambridge or Braintree.</p>                        
-                        <div class="prayer-info-item">
-                            <span class="prayer-info-label">Iftar:</span>
-                            <span>If you'd like to host a community iftar, please get in touch</span>
+                            <span class="prayer-info-label">Eid Prayer:</span>
+                            <span>Friday 6th June 2025 at 11:00 AM</span>
                         </div>
+                        <div class="prayer-info-item">
+                            <span class="prayer-info-label">Location:</span>
+                            <span>Friends Meeting House</span>
+                        </div>
+                        <div class="prayer-info-item">
+                            <span class="prayer-info-label">Community Welcome:</span>
+                            <span>All families and community members are especially welcome to join this celebration</span>
+                        </div>                    
+                        <p class="prayer-card-note">Congregants are encouraged to bring their own prayer mats. Please arrive 10–15 minutes early.</p>                        
                     </div>                    
                 </div>
             </div>
@@ -623,8 +631,8 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/prayer-times.js"></script>
-    <script src="js/cookie-notice.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/prayer-times.js"></script>
+    <script defer src="js/cookie-notice.js"></script>
 </body>
 </html>

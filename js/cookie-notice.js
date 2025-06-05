@@ -1,6 +1,6 @@
 /**
- * Cookie Notice for Saffron Walden Muslim Community
- * Uses only essential cookies and Cloudflare's cookieless analytics
+ * Custom Cookie Notice Implementation for Saffron Walden Muslim Community
+ * This code is part of the project and licensed under the MIT License.
  */
 
 class CookieNotice {
@@ -57,13 +57,12 @@ class CookieNotice {
     
     // Cookie utility methods
     setCookie(name, value, days) {
-        let expires = '';
+        let expiryStr = '';
         if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = '; expires=' + date.toUTCString();
+            const expiryDate = new Date(Date.now() + days * 86400000);
+            expiryStr = '; expires=' + expiryDate.toUTCString();
         }
-        document.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/; SameSite=Lax';
+        document.cookie = name + '=' + encodeURIComponent(value) + expiryStr + '; path=/; SameSite=Lax; Secure';
     }
     
     getCookie(name) {
