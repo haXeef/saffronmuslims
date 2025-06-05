@@ -4,14 +4,16 @@ const navMenu = document.querySelector('.nav-menu');
 
 mobileMenuBtn.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    // Update aria-expanded for accessibility
+    const isExpanded = navMenu.classList.contains('active');
+    mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
     // Change menu icon
     const icon = mobileMenuBtn.querySelector('i');
-    if (navMenu.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
+    // Custom toggle: use classList.replace for clarity and uniqueness
+    if (isExpanded) {
+        icon.classList.replace('fa-bars', 'fa-times');
     } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+        icon.classList.replace('fa-times', 'fa-bars');
     }
 });
 

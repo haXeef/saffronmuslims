@@ -167,6 +167,8 @@ p + p {
     quotes: '\201C' '\201D' '\2018' '\2019';
 }
 
+/* For production: minify this file or set up a build tool (e.g., PostCSS, cssnano) */
+
 /* ===================================
    2. Typography
    =================================== */
