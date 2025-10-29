@@ -245,6 +245,31 @@ class PrayerTimesCalculator {
     }
 }
 
+// Ramadan Countdown Function
+function updateRamadanCountdown() {
+    // Ramadan 1447H expected start date
+    const ramadanStartDate = new Date('2026-02-18T00:00:00');
+    const today = new Date();
+
+    // Calculate difference in milliseconds
+    const timeDiff = ramadanStartDate - today;
+
+    // Convert to days
+    const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    // Update the countdown display
+    const countdownElement = document.getElementById('countdown-days');
+    if (countdownElement) {
+        if (daysRemaining > 0) {
+            countdownElement.textContent = daysRemaining;
+        } else if (daysRemaining === 0) {
+            countdownElement.textContent = 'Today!';
+        } else {
+            countdownElement.textContent = 'Started';
+        }
+    }
+}
+
 // Initialize and run
 document.addEventListener('DOMContentLoaded', () => {
     const prayerTimes = new PrayerTimesCalculator();
@@ -261,7 +286,13 @@ document.addEventListener('DOMContentLoaded', () => {
             prayerTimes.updatePrayerTimes();
         }
     });
-    
+
+    // Initialize Ramadan countdown
+    updateRamadanCountdown();
+
+    // Update countdown daily at midnight
+    setInterval(updateRamadanCountdown, 86400000); // 24 hours
+
     // Add this CSS for loading and error states
     const style = document.createElement('style');
     style.textContent = `
@@ -269,11 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
             opacity: 0.7;
             animation: pulsePrayerTime 1.5s infinite;
         }
-        
+
         .prayer-time-error {
             color: #d25757;
         }
-        
+
         @keyframes pulsePrayerTime {
             0% { opacity: 0.7; }
             50% { opacity: 0.4; }
