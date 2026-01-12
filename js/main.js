@@ -2,40 +2,49 @@
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
 
-mobileMenuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    // Update aria-expanded for accessibility
-    const isExpanded = navMenu.classList.contains('active');
-    mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
-    // Change menu icon
-    const icon = mobileMenuBtn.querySelector('i');
-    // Custom toggle: use classList.replace for clarity and uniqueness
-    if (isExpanded) {
-        icon.classList.replace('fa-bars', 'fa-times');
-    } else {
-        icon.classList.replace('fa-times', 'fa-bars');
-    }
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
+// Only set up mobile menu if elements exist
+if (mobileMenuBtn && navMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        // Update aria-expanded for accessibility
+        const isExpanded = navMenu.classList.contains('active');
+        mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+        // Change menu icon
         const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    }
-});
+        if (icon) {
+            // Custom toggle: use classList.replace for clarity and uniqueness
+            if (isExpanded) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+    });
 
-// Close menu when window is resized beyond mobile breakpoint
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    }
-});
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+
+    // Close menu when window is resized beyond mobile breakpoint
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
+}
 
 // Animation on scroll for subtle entrance animations
 document.addEventListener('DOMContentLoaded', () => {
