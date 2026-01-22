@@ -47,8 +47,59 @@ class PrayerTimesCalculator {
             if (hanafiData.code === 200 && shafiData.code === 200) {
                 const timings = hanafiData.data.timings;
                 const shafiAsr = shafiData.data.timings.Asr;
-                const hijri = hanafiData.data.date.hijri;
+                const hijriFromAlAdhan = hanafiData.data.date.hijri;
                 const gregorian = hanafiData.data.date.gregorian;
+
+                // Use New Crescent Society calendar for Hijri date display when possible.
+                // This keeps AlAdhan as the source of prayer timings only.
+                let hijri = hijriFromAlAdhan;
+                try {
+                    const api = window.NcsIslamicCalendar;
+                    if (api && typeof api.fetchEvents === 'function') {
+                        const events = await api.fetchEvents();
+                        const today = new Date();
+                        const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+                        const sameDate = (a, b) =>
+                            a.getFullYear() === b.getFullYear() &&
+                            a.getMonth() === b.getMonth() &&
+                            a.getDate() === b.getDate();
+
+                        const parseHijriFromSummary = (summary) => {
+                            if (typeof summary !== 'string') return null;
+                            const parts = summary.split('•').map(p => p.trim()).filter(Boolean);
+                            if (!parts.length) return null;
+
+                            // Format: DD/MM/YYYY • MonthName • (optional extras)
+                            const datePart = parts[0];
+                            const m = datePart.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+                            if (!m) return null;
+
+                            const day = parseInt(m[1], 10);
+                            const monthName = parts[1] || null;
+                            const year = parseInt(m[3], 10);
+                            if (!day || !year) return null;
+
+                            return {
+                                day,
+                                month: { en: monthName || '' },
+                                year
+                            };
+                        };
+
+                        const todaysEvent = (events || [])
+                            .filter(e => e && e.startDate instanceof Date && !Number.isNaN(e.startDate.valueOf()))
+                            .find(e => sameDate(e.startDate, todayMidnight) && parseHijriFromSummary(e.summary));
+
+                        const parsed = todaysEvent ? parseHijriFromSummary(todaysEvent.summary) : null;
+                        if (parsed && parsed.month && parsed.month.en) {
+                            hijri = parsed;
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Hijri date display: failed to use NCS calendar feed, falling back:', error);
+                    hijri = hijriFromAlAdhan;
+                }
                 
                 // Save to cache
                 this.saveToCache({
@@ -214,6 +265,74 @@ class PrayerTimesCalculator {
         }
     }
 
+    async refreshHijriFromNcs(gregorian) {
+        try {
+            const api = window.NcsIslamicCalendar;
+            if (!api || typeof api.fetchEvents !== 'function') return;
+
+            const events = await api.fetchEvents();
+            const now = new Date();
+            const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            const sameDate = (a, b) =>
+                a.getFullYear() === b.getFullYear() &&
+                a.getMonth() === b.getMonth() &&
+                a.getDate() === b.getDate();
+
+            const parseHijriFromSummary = (summary) => {
+                if (typeof summary !== 'string') return null;
+                const parts = summary.split('•').map(p => p.trim()).filter(Boolean);
+                if (parts.length < 2) return null;
+
+                const datePart = parts[0];
+                const m = datePart.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+                if (!m) return null;
+
+                const day = parseInt(m[1], 10);
+                const year = parseInt(m[3], 10);
+                const monthName = parts[1] || '';
+
+                if (!day || !year || !monthName) return null;
+
+                return {
+                    day,
+                    month: { en: monthName },
+                    year
+                };
+            };
+
+            const todayEvents = (events || [])
+                .filter(e => e && e.startDate instanceof Date && !Number.isNaN(e.startDate.valueOf()))
+                .filter(e => sameDate(e.startDate, todayMidnight))
+                .map(e => ({ e, parsed: parseHijriFromSummary(e.summary) }))
+                .filter(x => x.parsed);
+
+            const parsed = todayEvents[0]?.parsed;
+            if (!parsed) return;
+
+            const dateElement = document.querySelector('.date-text');
+            if (!dateElement) return;
+
+            const gregorianDate = `${gregorian.day} ${gregorian.month.en} ${gregorian.year}`;
+            const hijriDate = `${parsed.day} ${parsed.month.en} ${parsed.year}`;
+            dateElement.innerHTML = `${gregorianDate} · <span class="ordinal-date">${hijriDate}</span>`;
+
+            // Update cached hijri so subsequent loads stay consistent.
+            try {
+                const cachedData = localStorage.getItem(this.CACHE_KEY);
+                if (cachedData) {
+                    const data = JSON.parse(cachedData);
+                    data.hijri = parsed;
+                    localStorage.setItem(this.CACHE_KEY, JSON.stringify(data));
+                }
+            } catch {
+                // ignore
+            }
+        } catch (error) {
+            console.warn('Hijri date display: NCS refresh failed:', error);
+        }
+    }
+
     loadFromCache(ignoreExpiry = false) {
         try {
             const cachedData = localStorage.getItem(this.CACHE_KEY);
@@ -231,6 +350,10 @@ class PrayerTimesCalculator {
             // Cache is valid, use it
             const data = JSON.parse(cachedData);
             this.updateDOM(data.timings, data.hijri, data.gregorian, data.shafiAsr);
+
+            // Even when we use cached prayer times, refresh the Hijri display from NCS if possible
+            // to prevent off-by-one differences between AlAdhan's Hijri date and NCS.
+            this.refreshHijriFromNcs(data.gregorian);
             return true;
         } catch (error) {
             console.warn('Failed to load cached prayer times:', error);
@@ -246,16 +369,111 @@ class PrayerTimesCalculator {
 }
 
 // Ramadan Countdown Function
-function updateRamadanCountdown() {
-    // Ramadan 1447H expected start date
-    const ramadanStartDate = new Date('2026-02-18T00:00:00');
+async function updateRamadanCountdown() {
+    // Prefer New Crescent Society Islamic Calendar feed for Ramadan start.
+    // Fallback to the previously hardcoded date if feed is unavailable.
+    const fallbackStartDate = new Date('2026-02-18T00:00:00');
+
+    // If we can only infer from moon-sighting, represent a window:
+    // earliest = moonSightingDate + 1 day
+    // latest   = moonSightingDate + 2 days (if the month completes 30 days)
+    let ramadanStartDate = fallbackStartDate;
+    let ramadanStartLatestDate = null;
+
+    function addDays(date, days) {
+        const d = new Date(date);
+        d.setDate(d.getDate() + days);
+        return d;
+    }
+
+    try {
+        const api = window.NcsIslamicCalendar;
+        if (api && typeof api.fetchEvents === 'function') {
+            const events = await api.fetchEvents();
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            const allEvents = (events || [])
+                .filter(e => e && e.startDate instanceof Date && !Number.isNaN(e.startDate.valueOf()));
+
+            // 1) Preferred: explicit Ramadan "Month Begins" event.
+            const candidates = allEvents
+                .filter(e => e && e.startDate instanceof Date && !Number.isNaN(e.startDate.valueOf()))
+                .filter(e => typeof e.summary === 'string' && e.summary.toLowerCase().includes('ramadan'))
+                .sort((a, b) => a.startDate - b.startDate);
+
+            const monthBegins = candidates.find(e => e.summary.toLowerCase().includes('month begins'));
+            const nextRamadan = monthBegins || candidates.find(e => e.startDate >= today);
+
+            if (nextRamadan && nextRamadan.startDate) {
+                ramadanStartDate = new Date(
+                    nextRamadan.startDate.getFullYear(),
+                    nextRamadan.startDate.getMonth(),
+                    nextRamadan.startDate.getDate(),
+                    0, 0, 0
+                );
+                ramadanStartLatestDate = null;
+            } else {
+                // 2) Fallback: use the next "Moon Sighting" night and infer a start window.
+                // In practice: if the crescent is seen, Ramadan starts the next day.
+                // If not seen, the month completes 30 days and Ramadan starts the day after.
+                const moonCandidates = allEvents
+                    .filter(e => e.startDate >= today)
+                    .filter(e => {
+                        const summary = (e.summary || '').toLowerCase();
+                        const categories = (e.categories || '').toLowerCase();
+
+                        return categories.includes('moon sighting') || summary.includes('moon sighting');
+                    })
+                    .sort((a, b) => a.startDate - b.startDate);
+
+                const moon = moonCandidates[0];
+                if (moon && moon.startDate) {
+                    const earliest = addDays(moon.startDate, 1);
+                    const latest = addDays(moon.startDate, 2);
+
+                    ramadanStartDate = new Date(
+                        earliest.getFullYear(),
+                        earliest.getMonth(),
+                        earliest.getDate(),
+                        0, 0, 0
+                    );
+                    ramadanStartLatestDate = new Date(
+                        latest.getFullYear(),
+                        latest.getMonth(),
+                        latest.getDate(),
+                        0, 0, 0
+                    );
+                }
+            }
+        }
+    } catch (error) {
+        console.warn('Ramadan countdown: failed to use NCS calendar feed, falling back:', error);
+    }
+
     const today = new Date();
+    const start = new Date(ramadanStartDate.getFullYear(), ramadanStartDate.getMonth(), ramadanStartDate.getDate());
+    const nowMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-    // Calculate difference in milliseconds
-    const timeDiff = ramadanStartDate - today;
-
-    // Convert to days
+    // Calculate days remaining (calendar days)
+    const timeDiff = start - nowMidnight;
     const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    // Update the expected start label
+    const startDateElement = document.getElementById('ramadan-start-date');
+    if (startDateElement) {
+        const fmt = new Intl.DateTimeFormat('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+        if (ramadanStartLatestDate && ramadanStartLatestDate.getTime() !== start.getTime()) {
+            startDateElement.textContent = `${fmt.format(start)}–${fmt.format(ramadanStartLatestDate)}`;
+        } else {
+            startDateElement.textContent = fmt.format(start);
+        }
+    }
 
     // Update the countdown display
     const countdownElement = document.getElementById('countdown-days');

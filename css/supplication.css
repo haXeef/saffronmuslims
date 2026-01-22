@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&display=swap');
+
+/* Supplication page styles
+   - Inherits global design tokens, typography, and reset from css/styles.css
+   - Keep this file small and scoped to .supplication-page for long-term maintainability
+*/
+
+.supplication-page header {
+    position: relative;
+    text-align: center;
+    padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-xl) + 2rem) var(--spacing-lg) var(--spacing-xl);
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.supplication-page header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--accent-color),
+        var(--accent-color) 20px,
+        var(--primary-color) 20px,
+        var(--primary-color) 40px
+    );
+    opacity: 0.85;
+}
+
+.supplication-page header h1 {
+    margin-bottom: var(--spacing-xs);
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
+}
+
+.supplication-page header h2 {
+    font-family: 'Scheherazade New', serif !important;
+    color: var(--primary-dark);
+    direction: rtl;
+    margin-bottom: var(--spacing-sm);
+    font-size: clamp(1.4rem, 4.5vw, 2rem);
+}
+
+.supplication-page header p {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+}
+
+.supplication-page .back-link {
+    position: absolute;
+    left: calc(env(safe-area-inset-left, 0px) + var(--spacing-lg));
+    top: calc(env(safe-area-inset-top, 0px) + var(--spacing-lg));
+    color: var(--text-color);
+    text-decoration: none;
+    opacity: 0.8;
+    font-size: var(--text-sm);
+}
+
+.supplication-page .back-link:hover,
+.supplication-page .back-link:focus {
+    color: var(--primary-color);
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.supplication-page .container {
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+}
+
+.supplication-page table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.supplication-page thead th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    font-size: var(--text-xl);
+    font-weight: 500;
+}
+
+.supplication-page thead th:first-child {
+    text-align: left;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.supplication-page thead th:last-child {
+    text-align: right;
+    font-family: 'Scheherazade New', serif !important;
+    font-size: var(--text-xl);
+}
+
+.supplication-page tbody tr {
+    transition: background-color var(--transition-medium);
+}
+
+.supplication-page tbody tr:nth-child(odd) {
+    background-color: var(--light-alt);
+}
+
+.supplication-page tbody tr:hover {
+    background-color: rgba(213, 115, 48, 0.08);
+}
+
+.supplication-page td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    vertical-align: middle;
+    line-height: 1.8;
+}
+
+.supplication-page td.english {
+    width: 50%;
+    font-size: clamp(1rem, 1.2vw + 0.75rem, 1.125rem);
+    color: var(--text-color);
+    text-align: left;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+    text-wrap: pretty;
+    /* Keep each couplet line to exactly one line; <br> still breaks the couplet into two lines */
+    white-space: nowrap;
+}
+
+.supplication-page td.arabic {
+    width: 50%;
+    font-family: 'Scheherazade New', serif;
+    font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+    color: var(--dark-color);
+    text-align: right;
+    direction: rtl;
+    line-height: 2;
+    text-wrap: balance;
+}
+
+.supplication-page footer {
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    color: var(--text-muted);
+}
+
+.supplication-page footer p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .supplication-page header {
+        padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-lg) + 2rem) var(--spacing-md) var(--spacing-lg);
+    }
+
+    .supplication-page .back-link {
+        left: calc(env(safe-area-inset-left, 0px) + var(--spacing-md));
+        top: calc(env(safe-area-inset-top, 0px) + var(--spacing-md));
+    }
+
+    .supplication-page td.english {
+        font-size: clamp(0.95rem, 2.2vw + 0.6rem, 1.05rem);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .supplication-page td.arabic {
+        font-size: clamp(1.1rem, 4.2vw, 1.35rem);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .supplication-page table,
+    .supplication-page thead,
+    .supplication-page tbody,
+    .supplication-page th,
+    .supplication-page td,
+    .supplication-page tr {
+        display: block;
+    }
+
+    .supplication-page thead {
+        display: none;
+    }
+
+    .supplication-page tr {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .supplication-page td {
+        width: 100% !important;
+        border-right: none !important;
+        text-align: center !important;
+    }
+
+    .supplication-page td.arabic {
+        order: 1;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding-bottom: 1rem;
+        text-align: center !important;
+    }
+
+    .supplication-page td.english {
+        order: 2;
+        padding-top: 1rem;
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .supplication-page header {
+        padding: calc(env(safe-area-inset-top, 0px) + var(--spacing-md) + 2rem) var(--spacing-sm) var(--spacing-md);
+    }
+
+    .supplication-page .back-link {
+        left: calc(env(safe-area-inset-left, 0px) + var(--spacing-sm));
+        top: calc(env(safe-area-inset-top, 0px) + var(--spacing-sm));
+    }
+
+    .supplication-page td {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 360px) {
+    .supplication-page td.english {
+        font-size: 0.92rem;
+        letter-spacing: -0.01em;
+    }
+}
